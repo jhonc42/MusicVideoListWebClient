@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   
   myForm: FormGroup = this.fb.group({
-    email: ['asdfads@asdf.com', [Validators.required, Validators.email]],
+    email: ['admin@test.com', [Validators.required, Validators.email]],
     password: ['123456', [Validators.required, Validators.minLength(6)]]
   });
 
@@ -25,7 +25,7 @@ export class LoginComponent {
       .subscribe(isSuccess => {
         // this is because may come an object through map operator of authService
         if (isSuccess === true) {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/protected/dashboard');
         } else {
           Swal.fire('Error', isSuccess, 'error')
         }

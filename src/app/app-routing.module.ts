@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidateTokenGuard } from './guards/validate-token.guard';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 
 const routes: Routes = [
   {
@@ -8,15 +9,17 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'dashboard',
+    path: 'protected',
     loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
     canActivate: [ValidateTokenGuard],
     canLoad: [ValidateTokenGuard]
   },
-  {
-    path: '**',
-    redirectTo: 'auth'
-  }
+  { path: '', redirectTo: '/protected/dashboard', pathMatch: 'full' },
+  // {
+  //   path: '**',
+  //   redirectTo: 'auth'
+  // }
+  {path: '**', component: NopagefoundComponent}
 ];
 
 
