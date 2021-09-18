@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SearchYTResult } from 'src/app/shared/models/search-yt-result';
 import { AuthService } from '../../auth/services/auth.service';
+import { SearchService } from '../../shared/services/search/search.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,15 +12,27 @@ import { AuthService } from '../../auth/services/auth.service';
   ]
 })
 export class DashboardComponent {
-
+  wordSearched: string = '';
+  resultSearch!: SearchYTResult;
   dataDailySalesChart:any = {};
   get user() {
     return this.authService.user;
   }
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private searchService: SearchService) { }
   logout() {
     this.router.navigateByUrl('/auth/login');
     this.authService.logout();
+  }
+
+  onSearch = () => {
+    this.searchService.searchByWord(this.wordSearched).subscribe(resp => {
+      this.resultSearch = resp.data!;
+      console.log(this.resultSearch);
+    });
+  }
+  selectVideo = () => {
+    console.log();
+    alert("asdf");
   }
 
   // initDocumentationCharts() {

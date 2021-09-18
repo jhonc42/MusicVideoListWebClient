@@ -7,7 +7,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PlayListComponent } from './play-list/play-list.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ProtectedRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ProtectedModule { }
