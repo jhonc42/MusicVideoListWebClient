@@ -8,6 +8,12 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PlayListComponent } from './play-list/play-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogVideoShowComponent } from './components/dialog-video-show/dialog-video-show.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -15,14 +21,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     MainPageComponent,
     UserProfileComponent,
-    PlayListComponent
+    PlayListComponent,
+    DialogVideoShowComponent
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatTableModule
   ]
 })
 export class ProtectedModule { }
