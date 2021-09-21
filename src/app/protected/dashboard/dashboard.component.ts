@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Item, SearchYTResult } from 'src/app/protected/models/search-yt-result';
+import Swal from 'sweetalert2';
 import { AuthService } from '../../auth/services/auth.service';
 import { DialogVideoShowComponent } from '../components/dialog-video-show/dialog-video-show.component';
 import { SearchService } from '../services/search.service';
@@ -15,7 +16,7 @@ export class DashboardComponent {
   wordSearched: string = '';
   resultSearch!: SearchYTResult;
   dataDailySalesChart:any = {};
-  displayedColumns: string[] = ['image', 'title', 'watch'];
+  displayedColumns: string[] = ['image', 'title'];
   itemList: Item[] = [{
     "kind": "youtube#searchResult",
     "etag": "9EoWCyLZySTSl0NPdFwLJNYFJFw",
@@ -65,16 +66,48 @@ export class DashboardComponent {
     this.searchService.searchByWord(this.wordSearched).subscribe(resp => {
       this.resultSearch = resp.data!;
       this.dataSource = this.resultSearch.items;
+      this.itemList = this.resultSearch.items;
       console.log(this.resultSearch);
     });
   }
-  showVideo = (e: any) => {
-    console.log(e);
-    const dialogRef = this.dialog.open(DialogVideoShowComponent);
+  showVideo = (videoId: any) => {
+    console.log(videoId);
+    Swal.fire({
+      html: `
+        <h4>${videoId}</h4>
+        <hr>
+        <iframe width="100%"
+                height= "315"
+                src="https://www.youtube.com/embed/${videoId}"
+                frameborder="0"
+                allow="accelerometer";
+                autoplay;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture"
+                allowfullscreen>
+        </iframe>
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+        `
     });
+    // let config = new MatDialogConfig();
+    // config = {
+    //   // position: {
+    //   //   top: '140px',
+    //   //   right: '100px'
+    //   // },
+    //   height: '85%',
+    //   width: '100%',
+    //   panelClass: 'full-screen-modal',
+    //   data: {
+    //     dataKey: videoId
+    //   }
+    // };
+    // const dialogRef = this.dialog.open(DialogVideoShowComponent, config);
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
 
   // initDocumentationCharts() {

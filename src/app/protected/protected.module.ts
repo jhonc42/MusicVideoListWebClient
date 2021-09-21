@@ -14,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogVideoShowComponent } from './components/dialog-video-show/dialog-video-show.component';
 import {MatTableModule} from '@angular/material/table';
+import { SafePipe } from '../pipes/safe.pipe';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatTableModule} from '@angular/material/table';
     MainPageComponent,
     UserProfileComponent,
     PlayListComponent,
-    DialogVideoShowComponent
+    DialogVideoShowComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,
